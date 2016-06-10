@@ -1,0 +1,30 @@
+{
+  "name": "aliceplanner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "alice-server.js",
+  "dependencies": {
+    "express": "^4.13.4",
+    "lodash": "^4.13.1",
+    "nodemon": "^1.9.2",
+    "nonce": "^1.0.3",
+    "oauth-signature": "^1.3.1",
+    "request": "^2.72.0",
+    "yelp": "^1.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node alice-server.js",
+    "dev": "nodemon alice-server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ontidaxt/aliceplanner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ontidaxt/aliceplanner/issues"
+  },
+  "homepage": "https://github.com/ontidaxt/aliceplanner#readme"
+}
