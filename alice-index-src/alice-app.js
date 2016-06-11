@@ -1,37 +1,58 @@
+var each = function(collection, callback){
+		if(typeof collection !== 'object'){
+			console.log(collection + ' is not an object!')
+			return;
+		}
+
+		if(Array.isArray(collection)){
+		  for(var i = 0; i < collection.length; i++){
+			callback(collection[i], i, collection);
+		  }	
+		} else {
+		  for(var key in collection){
+		  	callback(collection[key], key, collection);
+		  }
+		}
+		return;
+	};
 
 var selected = function(collection) {
-	//var category = document.getElementById('add-text'); 
+	var stores = [];
 	var responseObj = JSON.parse(collection);
 	
-	var store = responseObj.businesses[0];
-	var storeName = store.name;
-	var storeUrl = store.url;
-	var storeCategories = store.categories;
-	var storeAddress = store.location.address[0] + ', '+ store.location.city + ', ' + store.location['state_code'] + ', ' + store.location['postal_code']
-	//console.log(store.location['state_code']);
-	//console.log(store.location['postal_code']);
-	var storeCrossStreet = store.location['cross_streets'];
-	var storeRatingImg = store['rating_img_url_small'];
+	each(responseObj.businesses, function(value, key){
+		stores.push({'name': value.name,
+					'url': value.url,
+					'categories': value.categories,
+					'address': value.location.address[0] + ', ' +value.location.city +', ' + value.location['state_code'] + ', ' + value.location['postal_code'],
+					'crossStreet': value.location['cross_streets'],
+					'ratingImg': value['rating_img_url_small']
+		});
+	});
 
-	var businessName = document.getElementById('business-name'); 
-	businessName.innerText = storeName;
-	//var category = document.getElementById('categories');
-	//category.innerText = storeCategories;
-	var businessRating = document.getElementById('rating-img');
-	businessRating.src = storeRatingImg;
-	var businessAddress = document.getElementById('address');
-	businessAddress.innerText = storeAddress;
-	
+	each(stores, function(value, key){
+		var business = document.createElement("h3");
+		var	storeName = document.createTextNode(value.name + " ");
+		business.appendChild(storeName);
+
+		var storeRatingImg = document.createElement("img");
+		storeRatingImg.setAttribute('src', value.ratingImg);
+		business.appendChild(storeRatingImg);
+		document.getElementById("result-1").appendChild(business);
+
+		var storeAddress = document.createElement("p");
+		var actulAddress = document.createTextNode(value.address);
+		storeAddress.appendChild(actulAddress);
+		document.getElementById("result-1").appendChild(storeAddress);
+		var space = document.createElement("br");
+		document.getElementById("result-1").appendChild(space);
+
+	});
 }
-
-console.log("alice-app.js is connected!");
 
 var search = function() {
 	var location = document.getElementById("zipcode");
 	var zipcode = location.value;
-	
-
-	//var zipcode = "94102";
 
 	var xhr = new XMLHttpRequest();
 
@@ -46,11 +67,8 @@ var search = function() {
 
 	};
 
-
 	xhr.send();
 
 }
-
-//google.com/search?value=cats&date=4102015
 
 
