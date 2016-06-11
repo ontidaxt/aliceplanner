@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>the WorkSpace</title>
+		<meta content="text/html" charset="utf-8">
+	</head>
+	<body>
+	<center>
+		<div id="container">
+		<h1>the<br>WORKSPACE</h1>
+		</div>
+		
+
+		<div id = "form-box">
+
+			<h4 class = "primary-text">Help you find quick places that you can get your work done!</h4>
+			<p class = "secondary-text">Just tell us where you're at!</p>
+			
+			<form action = " ">
+
+				<input id = "zipcode"
+					type = "text"
+					value = "94102"
+					size = 7
+					placeholder = "zip code" 
+					maxlength= 5>
+				
+				<input id = "button" 
+				type = "button"
+				value = "Find me a place!"
+				onClick = "search()"> 
+
+			</form>
+		</div>
+	</center>
+		<div id = "results-box">
+			<h3 id = "business-name"> </h3>
+			<img id = "rating-img">
+		
+			<p id = "categories"></p>
+			<p id = "address"></p>
+		
+		</div>
+
+
+		<script type="text/javascript" src="alice-app.js"></script>
+
+
+	
+	</body>
+</html>
