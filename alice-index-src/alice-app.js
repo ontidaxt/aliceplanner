@@ -17,6 +17,7 @@ var each = function(collection, callback){
 	};
 
 var selected = function(collection) {
+	
 	var stores = [];
 	var responseObj = JSON.parse(collection);
 	
@@ -31,13 +32,22 @@ var selected = function(collection) {
 	});
 
 	each(stores, function(value, key){
+		var resultBox = document.createElement("div");
+		resultBox.id = "result-1";
+		document.getElementById("results-box").appendChild(resultBox);
+
+		var yelpLink = document.createElement("a");
+		yelpLink.setAttribute('href', value.url);
+		
 		var business = document.createElement("h3");
 		var	storeName = document.createTextNode(value.name + " ");
 		business.appendChild(storeName);
 
 		var storeRatingImg = document.createElement("img");
 		storeRatingImg.setAttribute('src', value.ratingImg);
-		business.appendChild(storeRatingImg);
+
+		yelpLink.appendChild(storeRatingImg);
+		business.appendChild(yelpLink);		
 		document.getElementById("result-1").appendChild(business);
 
 		var storeAddress = document.createElement("p");
@@ -46,11 +56,18 @@ var selected = function(collection) {
 		document.getElementById("result-1").appendChild(storeAddress);
 		var space = document.createElement("br");
 		document.getElementById("result-1").appendChild(space);
-
+		
 	});
+
+	var credit = document.createElement("img");
+	credit.setAttribute('src', "poweredByYelp.png");
+	document.getElementById("result-1").appendChild(credit);
 }
 
 var search = function() {
+	var removePrevResults = document.getElementById("result-1");
+	removePrevResults.remove();
+
 	var location = document.getElementById("zipcode");
 	var zipcode = location.value;
 
