@@ -17,6 +17,7 @@ var each = function(collection, callback){
 	};
 
 var selected = function(collection) {
+
 	
 	var stores = [];
 	var responseObj = JSON.parse(collection);
@@ -27,11 +28,24 @@ var selected = function(collection) {
 					'categories': value.categories,
 					'address': value.location.address[0] + ', ' +value.location.city +', ' + value.location['state_code'] + ', ' + value.location['postal_code'],
 					'crossStreet': value.location['cross_streets'],
-					'ratingImg': value['rating_img_url_small']
+					'ratingImg': value['rating_img_url_small'],
+					//'latitude': value.location.coordinate.latitude,
+					//'longtitude': value.location.coordinate.longitude
 		});
 	});
-
+	
 	each(stores, function(value, key){
+		console.log(value.categories);
+		var addressArr = value.address.split(" ");
+		var	addressParam = "";
+		each(addressArr,function(element, key, collection){
+			if(key < collection.length-1){
+			  addressParam = addressParam + element + "%20"; 
+			} else {
+			  addressParam += element;
+			}	
+		});
+
 		var resultBox = document.createElement("div");
 		resultBox.id = "result-1";
 		document.getElementById("results-box").appendChild(resultBox);
@@ -56,7 +70,13 @@ var selected = function(collection) {
 		document.getElementById("result-1").appendChild(storeAddress);
 		var space = document.createElement("br");
 		document.getElementById("result-1").appendChild(space);
+
+		var myAPI = "AIzaSyCpom91tWpzix_pgvqn33vw3Z2k3hSU53M";
+		var googleMapStreetView = "https://maps.googleapis.com/maps/api/streetview?size=600x300&location="+ addressParam + "&key=" + myAPI;
 		
+		var streetView = document.createElement("img");
+		streetView.setAttribute('src', googleMapStreetView);
+		document.getElementById("result-1").appendChild(streetView);
 	});
 
 	var credit = document.createElement("img");
