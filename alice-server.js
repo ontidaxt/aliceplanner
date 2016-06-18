@@ -10,7 +10,23 @@ var n = require('nonce')();
 var qs = require('querystring');
 var _ = require('lodash');
 
+var apiKey = "AIzaSyCU1JuxIAEoYuRs2BY7ez4-tC-PIuVyiTQ";
+
 app.use(express.static(path.join(__dirname, 'alice-index-src')));
+
+app.get('/api/businessinfo', function(req, res){
+	var url = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+ req.query.hours+"&key=" + apiKey;
+	request(url, function(error, response, body){
+		res.send(body);
+	})
+})
+
+app.get('/api/location',function(req, res){
+	var url = "https://maps.googleapis.com/maps/api/geocode/json?address=" + req.query.address + "&key=" + apiKey;
+	request(url, function(error, response, body){
+		res.send(body);
+	})
+})
 
 app.get('/api/search', function(req, res){
 	var app_req = req.query.zip;
@@ -23,7 +39,7 @@ app.get('/api/search', function(req, res){
 		var default_parameters = {
 			term: 'good for working, free wifi',
 			sort: '2',
-			limit: '10'
+			limit: '2'
 			//attrs: 'Wifi.Free'
 			//deals_filter: true
 		};
