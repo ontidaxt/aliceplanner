@@ -39,7 +39,7 @@ app.get('/api/search', function(req, res){
 		var default_parameters = {
 			term: 'good for working, free wifi',
 			sort: '2',
-			limit: '2'
+			limit: '5'
 			//attrs: 'Wifi.Free'
 			//deals_filter: true
 		};
