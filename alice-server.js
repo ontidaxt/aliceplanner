@@ -14,6 +14,12 @@ var apiKey = "AIzaSyCU1JuxIAEoYuRs2BY7ez4-tC-PIuVyiTQ";
 
 app.use(express.static(path.join(__dirname, 'alice-index-src')));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 app.get('/api/businessinfo', function(req, res){
 	var url = "https://maps.googleapis.com/maps/api/place/details/json?placeid="+ req.query.hours+"&key=" + apiKey;
 	request(url, function(error, response, body){
@@ -31,6 +37,7 @@ app.get('/api/location',function(req, res){
 app.get('/api/search', function(req, res){
 	var app_req = req.query.zip;
 	//console.log(req.query);
+	//console.log(app_req);
 
 	var request_yelp = function(set_parameters, callback){
 		var httpMethod = 'GET';
@@ -39,7 +46,7 @@ app.get('/api/search', function(req, res){
 		var default_parameters = {
 			term: 'good for working, free wifi',
 			sort: '2',
-			limit: '5'
+			limit: '2'
 			//attrs: 'Wifi.Free'
 			//deals_filter: true
 		};

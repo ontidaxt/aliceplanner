@@ -4,21 +4,31 @@
 	<head>
 		<title>the WorkSpace</title>
 		<meta content="text/html" charset="utf-8">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Amatica+SC|Comfortaa" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Comfortaa" rel="stylesheet">
+		
+		<link rel="stylesheet" type="text/css" href="alice-index.css">
+		
 	</head>
 	<body>
 
 		<div id="container">
-			<div id = "header">
-			<center>
-				<h1>the<br>WORKSPACE</h1>
+
+			<!--<div id = "header">-->
+			<!--<center>-->
 				<div id = "form-box">
 
+				<section>
+				<h1><span class="work">WORK</span> <span class="space">SPACE</span></h1>
+				</section>
+
+				<aside>
 					<h4 class = "primary-text">Help you find quick places that you can get your work done!</h4>
 					<p class = "secondary-text">Just tell us where you're at!</p>
 					
 					<form action = " ">
-						<div id = "hidden-div"></div>
-
+						
 						<input id = "zipcode"
 							type = "text"
 							value = "94102"
@@ -32,19 +42,25 @@
 						onClick = "search()"> 
 
 					</form>
+				</aside>
 				</div>
-			</center>
-			<div id = "body">
+
+			<!--</center>-->
+
+
+			<!--<div id = "body">-->
 				<div id = "results-box">
 					<div id = "result-1">
+					<section></section>
+					<aside></aside>
 					</div>
 				
 				</div>
-			</div>
+			<!--</div>-->
 
 			
 		<script type="text/javascript" src="alice-app.js"></script>
-		
-	</div>
+		<footer id="credit"></footer>
+	<!--</div>-->
 	</body>
 </html>

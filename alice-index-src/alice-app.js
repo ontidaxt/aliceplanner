@@ -28,7 +28,7 @@ var placeID = function(){
   	var xhr = new XMLHttpRequest();
   	 //console.log(value.place);
 	
-	xhr.open('GET',"/api/businessinfo?hours=" + value.place);
+	xhr.open('GET',"http://localhost:3030/api/businessinfo?hours=" + value.place);
 
 	xhr.onload = function(){
 
@@ -61,11 +61,11 @@ var placeID = function(){
 };
 
 var googlePlaceID = function(){
-
+  
   each(stores, function(value, key){
-
+  
   	var xhr = new XMLHttpRequest();
-	xhr.open('GET',"/api/location?address=" + value.addressParam);
+	xhr.open('GET',"http://localhost:3030/api/location?address=" + value.addressParam);
 	xhr.onload = function(){
 
 	  if(xhr.status === 200){
@@ -96,7 +96,7 @@ var googlePlaceID = function(){
 var selected = function(collection) {
 	//console.log(stores);
   var responseObj = JSON.parse(collection);
-    //console.log(responseObj.businesses);	
+    console.log(responseObj.businesses);	
   each(responseObj.businesses, function(value, key){
     stores.push({'name': value.name,
 				  'yelpURL': value.url,
@@ -132,11 +132,16 @@ var imgHyperLink = function(id, hyperlink, image){
 	var parent = document.createElement("a");
 	parent.setAttribute('href', hyperlink);
 	var child = document.createElement("img");
+	child.id = "image";
 	child.setAttribute('src', image);
 	parent.appendChild(child);
 	return document.getElementById(id).appendChild(parent);
 };
 
+var displaySpace = function(id){
+	var space = document.createElement("br");
+	return document.getElementById(id).appendChild(space);
+};
 
 
 var displayResult = function(){
@@ -149,21 +154,31 @@ var displayResult = function(){
 		document.getElementById("results-box").appendChild(resultBox);
 
 		var myAPI = "AIzaSyCpom91tWpzix_pgvqn33vw3Z2k3hSU53M";
-		var googleMapStreetView = "https://maps.googleapis.com/maps/api/streetview?size=600x300&location="+ value.addressParam + "&key=" + myAPI;
+		var googleMapStreetView = "https://maps.googleapis.com/maps/api/streetview?size=400x200&location="+ value.addressParam + "&key=" + myAPI;
+
+		var testSection = document.createElement("section");
+		testSection.id = "business-description";
+		document.getElementById("result-1").appendChild(testSection);
+
+		var testAside = document.createElement("aside");
+		testAside.id = "business-streetview-image";
+		document.getElementById("result-1").appendChild(testAside);
+
+		textResults("business-description", "h3", value.name);
+		imgHyperLink("business-description", value.yelpURL, value.ratingImg);
+		textResults("business-description", "p", value.address);
+		imgHyperLink("business-streetview-image", value.googleURL, googleMapStreetView);
+		displaySpace("business-description");
 		
-		textResults("result-1", "h3", value.name);
-		imgHyperLink("result-1", value.yelpURL, value.ratingImg);
-		textResults("result-1", "p", value.address);
-		imgHyperLink("result-1", value.googleURL, googleMapStreetView);
-		
+
 	});
 	
-	var space = document.createElement("br");
-	document.getElementById("result-1").appendChild(space);
+	displaySpace("result-1");
+		
 
 	var credit = document.createElement("img");
 	credit.setAttribute('src', "poweredByYelp.png");
-	document.getElementById("result-1").appendChild(credit);
+	document.getElementById("credit").appendChild(credit);
 
 };
 
@@ -179,10 +194,11 @@ var search = function() {
 
 	var location = document.getElementById("zipcode");
 	var zipcode = location.value;
+	
 
 	var xhr = new XMLHttpRequest();
 
-	xhr.open('GET',"/api/search?zip=" + zipcode);
+	xhr.open('GET',"http://localhost:3030/api/search?zip=" + zipcode);
 
 	xhr.onload = function(){	
 	  if(xhr.status === 200){
