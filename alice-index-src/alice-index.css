@@ -1,11 +1,12 @@
 body {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Amatica SC';
 	background-color: orange;
-	/*font-style: italic;*/
+	font-size: 20px;
+
 	margin: 0 40px 0 10px;
 }
 
-h1 {
+p .work, .space {
 	font-family: 'Amatica SC';
 	font-size: 5em;
 
@@ -14,7 +15,26 @@ h1 {
 h3{
 	font-family: 'Comfortaa';
 	color: white;
-	/*font-style: bold;*/
+	font-style: bold;
+}
+
+p .primary-text {
+	font-family: 'Amatica SC';
+	font-size: 16px;
+}
+
+.secondary-text {
+	/*font-family: 'Comfortaa';*/
+	/*font-family: 'Farsan';*/
+	font-family: 'Courgette';
+	font-size: 22px;
+}
+
+
+#address {
+	/*font-family: 'Concert One';*/
+	font-family: 'Farsan';
+
 }
 
 div {
@@ -24,13 +44,18 @@ div {
 }
 
 div #form-box {
-	border-bottom: 6px solid white;
+	border-bottom: 3px solid white;
 }
 
 .work{
 	font-family: 'Amatica SC';
 	color: white;
 	font-style: bold;
+}
+
+#direction {
+	width: 30px;
+	height: 30px;
 }
 
 #form-box:before,
@@ -45,8 +70,8 @@ div #form-box {
   clear: both;
   *zoom: 1;
 }
+
 section {
-  /*background-color: green;*/
   float: left;
   margin: 0;
   width: 60%;
@@ -55,13 +80,13 @@ section {
 }
 
 aside {
-  /*background-color: white;*/
+
   float: right;
   /*margin: 0 1.5%;*/
   margin-right: 3%;
   width: 33%;
   margin-top: 40px;
-  text-align: left;
+  text-align: center;
   
 }
 
@@ -99,4 +124,8 @@ aside {
   /*margin-top: 40px;*/
   text-align: left;
   
+}
+
+#credit {
+  text-align: center;
 }

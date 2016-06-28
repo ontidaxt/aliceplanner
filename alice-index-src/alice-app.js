@@ -100,7 +100,8 @@ var selected = function(collection) {
   each(responseObj.businesses, function(value, key){
     stores.push({'name': value.name,
 				  'yelpURL': value.url,
-				  'categories': value.categories,
+				  //'categories': value.categories,
+				  'categories': value.categories.reduce(function(memo, current){ return memo + "#" + current[0] + " ";},""),
 				  'address': value.location.address[0] + ', ' +value.location.city +', ' + value.location['state_code'] + ', ' + value.location['postal_code'],
 				  'crossStreet': value.location['cross_streets'],
 				  'ratingImg': value['rating_img_url_small'],
@@ -128,14 +129,23 @@ var textResults = function(id, elem, content){
 
 };
 
-var imgHyperLink = function(id, hyperlink, image){
-	var parent = document.createElement("a");
-	parent.setAttribute('href', hyperlink);
+var imgHyperLink = function(id, image, hyperlink){
+
 	var child = document.createElement("img");
 	child.id = "image";
 	child.setAttribute('src', image);
-	parent.appendChild(child);
-	return document.getElementById(id).appendChild(parent);
+
+	if(arguments.length === 2){
+	  return document.getElementById(id).appendChild(child);
+
+	} else {
+
+	  var parent = document.createElement("a");
+	  parent.setAttribute('href', hyperlink);
+	  parent.appendChild(child);
+	  return document.getElementById(id).appendChild(parent);
+	}
+
 };
 
 var displaySpace = function(id){
@@ -154,7 +164,7 @@ var displayResult = function(){
 		document.getElementById("results-box").appendChild(resultBox);
 
 		var myAPI = "AIzaSyCpom91tWpzix_pgvqn33vw3Z2k3hSU53M";
-		var googleMapStreetView = "https://maps.googleapis.com/maps/api/streetview?size=400x200&location="+ value.addressParam + "&key=" + myAPI;
+		var googleMapStreetView = "https://maps.googleapis.com/maps/api/streetview?size=375x175&location="+ value.addressParam + "&key=" + myAPI;
 
 		var testSection = document.createElement("section");
 		testSection.id = "business-description";
@@ -164,21 +174,60 @@ var displayResult = function(){
 		testAside.id = "business-streetview-image";
 		document.getElementById("result-1").appendChild(testAside);
 
-		textResults("business-description", "h3", value.name);
-		imgHyperLink("business-description", value.yelpURL, value.ratingImg);
-		textResults("business-description", "p", value.address);
-		imgHyperLink("business-streetview-image", value.googleURL, googleMapStreetView);
+		console.log(value.categories);
+
+////// refactor this////////////////////////////////////////////////////////////////
+
+		//textResults("business-description", "h3", value.name);
+		//imgHyperLink("business-description", value.ratingImg, value.yelpURL);
+
+		var yelpRating = document.createElement("img");
+		yelpRating.id = "image";
+		yelpRating.setAttribute('src', value.ratingImg);
+		var yelpLink = document.createElement("a");
+	  	yelpLink.setAttribute('href', value.yelpURL);
+	  	yelpLink.appendChild(yelpRating);
+	  	
+	  	var business = document.createElement("h3");
+	    var businessName = document.createTextNode(value.name + " ");
+	    business.appendChild(businessName);
+	    business.appendChild(yelpLink);
+	    document.getElementById("business-description").appendChild(business);
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+		textResults("business-description", "p", value.categories);
+		//textResults("business-description", "p", value.address);
+
+		var direction = document.createElement("img");
+		direction.id = "direction";
+		direction.setAttribute('src', "direction.png");
+		var googleLink = document.createElement("a");
+	  	googleLink.setAttribute('href', value.googleURL);
+	  	googleLink.appendChild(direction);
+
+	  	var address = document.createElement("p");
+	  	address.id = "address";
+	    var businessAddress = document.createTextNode(value.address + " ");
+	    address.appendChild(businessAddress);
+	    address.appendChild(googleLink);
+	    document.getElementById("business-description").appendChild(address);
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+		imgHyperLink("business-streetview-image", googleMapStreetView);
 		displaySpace("business-description");
+		displaySpace("business-streetview-image");
+		displaySpace("business-streetview-image");
+		
 		
 
 	});
 	
 	displaySpace("result-1");
-		
+	imgHyperLink("credit", "poweredByYelp.png");
 
-	var credit = document.createElement("img");
-	credit.setAttribute('src', "poweredByYelp.png");
-	document.getElementById("credit").appendChild(credit);
 
 };
 
