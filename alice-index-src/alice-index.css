@@ -2,44 +2,44 @@ body {
 	font-family: 'Amatica SC';
 	background-color: orange;
 	font-size: 20px;
-
-	margin: 0 40px 0 10px;
+	/*margin: 0 40px 0 10px;*/
 }
 
-p .work, .space {
-	font-family: 'Amatica SC';
+.work{
+  color: white;
+  font-style: bold;
+}
+
+.work, .space {
 	font-size: 5em;
 
 }
 
-h3{
+#businessname {
 	font-family: 'Comfortaa';
+  font-size: 1.15em;
 	color: white;
 	font-style: bold;
 }
 
-p .primary-text {
-	font-family: 'Amatica SC';
+.primary-text {
 	font-size: 16px;
 }
 
 .secondary-text {
-	/*font-family: 'Comfortaa';*/
-	/*font-family: 'Farsan';*/
 	font-family: 'Courgette';
 	font-size: 22px;
 }
 
 
 #address {
-	/*font-family: 'Concert One';*/
 	font-family: 'Farsan';
 
 }
 
 div {
-	box-sizing: border-box
-	margin: 30px 10px 10px 0;
+	box-sizing: border-box;
+	/*margin: 30px 10px 10px 0;*/
 	
 }
 
@@ -47,11 +47,6 @@ div #form-box {
 	border-bottom: 3px solid white;
 }
 
-.work{
-	font-family: 'Amatica SC';
-	color: white;
-	font-style: bold;
-}
 
 #direction {
 	width: 30px;
@@ -73,7 +68,6 @@ div #form-box {
 
 section {
   float: left;
-  margin: 0;
   width: 60%;
   text-align: center;
 
@@ -82,7 +76,6 @@ section {
 aside {
 
   float: right;
-  /*margin: 0 1.5%;*/
   margin-right: 3%;
   width: 33%;
   margin-top: 40px;
@@ -106,14 +99,12 @@ aside {
 
 
 #result-1 section {
-  /*background-color: white;*/
   float: left;
   margin-left: 150px;
   padding-left: 15px;
   margin-top: 40px;
   width: 45%;
   text-align: left;
-  border-radius: 15px
   
 }
 
@@ -121,7 +112,6 @@ aside {
   float: right;
   width: 40%;
   margin-right: 0;
-  /*margin-top: 40px;*/
   text-align: left;
   
 }
