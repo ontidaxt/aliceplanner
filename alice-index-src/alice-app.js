@@ -31,12 +31,9 @@ var placeID = function(){
 
 	xhr.onload = function(){
 
-	  if(xhr.status === 200){
-	  	
+	  if(xhr.status === 200){	  	
 		var responseObj = JSON.parse(xhr.responseText);
-
 	    value.googleURL = responseObj.result.url;
-
 	    googleURLLength += 1;
 
 	      if(googleURLLength === stores.length){
@@ -67,6 +64,7 @@ var googlePlaceID = function(){
 	  	var responseObj = JSON.parse(xhr.responseText);	       
 	  	value['place'] = responseObj.results[0]['place_id'];
 	  	placeIDLength += 1;
+
 	  	 if(placeIDLength === stores.length){
 	      	return placeID();
 	     }
@@ -85,9 +83,9 @@ var googlePlaceID = function(){
 
 ///store important data in array and detail info in obj for quick access
 var selected = function(collection) {
-	//console.log(stores);
-  var responseObj = JSON.parse(collection);
-    console.log(responseObj.businesses);	
+
+  var responseObj = JSON.parse(collection);	
+
   each(responseObj.businesses, function(value, key){
     stores.push({'name': value.name,
 				  'yelpURL': value.url,
@@ -110,8 +108,10 @@ var selected = function(collection) {
   return googlePlaceID();
 
 };
+
 ////////////////////////////////////////////////////////////////////////
 var textResults = function(id, elem, content){
+
 	  var parent = document.createElement(elem);
 	  var child = document.createTextNode(content + " ");
 	  parent.appendChild(child);
@@ -119,31 +119,24 @@ var textResults = function(id, elem, content){
 
 };
 
-var imgHyperLink = function(id, image, hyperlink){
+var imgHyperLink = function(id, image){
 
 	var child = document.createElement("img");
 	child.id = "image";
 	child.setAttribute('src', image);
-
-	if(arguments.length === 2){
-	  return document.getElementById(id).appendChild(child);
-
-	} else {
-
-	  var parent = document.createElement("a");
-	  parent.setAttribute('href', hyperlink);
-	  parent.appendChild(child);
-	  return document.getElementById(id).appendChild(parent);
-	}
+	return document.getElementById(id).appendChild(child);
 
 };
 
 var displaySpace = function(id){
+
 	var space = document.createElement("br");
 	return document.getElementById(id).appendChild(space);
+
 };
 
 var addElement = function(element, parent, id){
+
 	var tag = document.createElement(element);
 	tag.id = id;
 	return document.getElementById(parent).appendChild(tag);
@@ -173,35 +166,24 @@ var displayResult = function(){
 
 	
 	each(stores, function(value, key){
-
-		addElement("div", "results-box", "result-1");
-
+		
 		var myAPI = "AIzaSyCpom91tWpzix_pgvqn33vw3Z2k3hSU53M";
 		var googleMapStreetView = "https://maps.googleapis.com/maps/api/streetview?size=375x175&location="+ value.addressParam + "&key=" + myAPI;
 	
+		addElement("div", "results-box", "result-1");
 		addElement("section", "result-1", "business-description");
-
-		addElement("aside", "result-1", "business-streetview-image");
-
-		
-		displayOnTheSameLine("business-description", "image", value.ratingImg, value.yelpURL, "businessname", value.name);
-		
-		textResults("business-description", "p", value.categories);
-		
+		addElement("aside", "result-1", "business-streetview-image");	
+		displayOnTheSameLine("business-description", "image", value.ratingImg, value.yelpURL, "businessname", value.name);		
+		textResults("business-description", "p", value.categories);	
 		displayOnTheSameLine("business-description", "direction", "direction.png", value.googleURL, "address", value.address);
-
 		imgHyperLink("business-streetview-image", googleMapStreetView);
 		displaySpace("business-description");
 		displaySpace("business-streetview-image");
 		displaySpace("business-streetview-image");
-		
-		
 
 	});
-	
-	//displaySpace("result-1");
-	imgHyperLink("credit", "poweredByYelp.png");
 
+	imgHyperLink("credit", "poweredByYelp.png");
 
 };
 
@@ -214,11 +196,9 @@ var search = function() {
 	googleURLLength = 0;
     placeIDLength = 0;
 
-
 	var location = document.getElementById("zipcode");
 	var zipcode = location.value;
 	
-
 	var xhr = new XMLHttpRequest();
 
 	xhr.open('GET',"http://localhost:3030/api/search?zip=" + zipcode);
