@@ -14,7 +14,7 @@ var apiKey = "AIzaSyCU1JuxIAEoYuRs2BY7ez4-tC-PIuVyiTQ";
 
 app.use(express.static(path.join(__dirname, 'alice-index-src')));
 
-app.use(function(req, res, next) {
+app.use(function(req, res, next){
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
@@ -36,9 +36,7 @@ app.get('/api/location',function(req, res){
 
 app.get('/api/search', function(req, res){
 	var app_req = req.query.zip;
-	//console.log(req.query);
-	//console.log(app_req);
-
+	
 	var request_yelp = function(set_parameters, callback){
 		var httpMethod = 'GET';
 		var url = 'http://api.yelp.com/v2/search';
@@ -47,8 +45,6 @@ app.get('/api/search', function(req, res){
 			term: 'good for working, free wifi',
 			sort: '2',
 			limit: '5'
-			//attrs: 'Wifi.Free'
-			//deals_filter: true
 		};
 
 		var required_parameters = {
@@ -89,8 +85,6 @@ app.get('/api/search', function(req, res){
 	});
 
 });
-
-
 
 var server = app.listen(3030, function(){
 	console.log('Server running at http://localhost:' + server.address().port);

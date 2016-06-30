@@ -1,28 +1,26 @@
+/* General */
+
 body {
 	font-family: 'Amatica SC';
 	background-color: orange;
 	font-size: 20px;
-	/*margin: 0 40px 0 10px;*/
 }
 
-.work{
+div {
+  box-sizing: border-box;
+}
+
+/* In the form-box */
+.work {
   color: white;
   font-style: bold;
 }
 
 .work, .space {
 	font-size: 5em;
-
 }
 
-#businessname {
-	font-family: 'Comfortaa';
-  font-size: 1.15em;
-	color: white;
-	font-style: bold;
-}
-
-.primary-text {
+footer, .primary-text {
 	font-size: 16px;
 }
 
@@ -32,25 +30,8 @@ body {
 }
 
 
-#address {
-	font-family: 'Farsan';
-
-}
-
-div {
-	box-sizing: border-box;
-	/*margin: 30px 10px 10px 0;*/
-	
-}
-
 div #form-box {
 	border-bottom: 3px solid white;
-}
-
-
-#direction {
-	width: 30px;
-	height: 30px;
 }
 
 #form-box:before,
@@ -58,9 +39,11 @@ div #form-box {
   content: "";
   display: table;
 }
+
 #form-box:after {
   clear: both;
 }
+
 #form-box {
   clear: both;
   *zoom: 1;
@@ -70,7 +53,6 @@ section {
   float: left;
   width: 60%;
   text-align: center;
-
 }
 
 aside {
@@ -83,39 +65,53 @@ aside {
   
 }
 
-#result-1:before,
-#result-1:after {
+/* In the result-box */
+
+#results:before,
+#results:after {
   content: "";
   display: table;
 }
-#result-1:after {
+#results:after {
   clear: both;
 }
-#result-1 {
+#results {
   clear: both;
   *zoom: 1;
 }
 
-
-
-#result-1 section {
+#results section {
   float: left;
   margin-left: 150px;
   padding-left: 15px;
   margin-top: 40px;
   width: 45%;
   text-align: left;
-  
 }
 
-#result-1 aside {
+#results aside {
   float: right;
   width: 40%;
   margin-right: 0;
-  text-align: left;
-  
+  text-align: left; 
 }
 
-#credit {
-  text-align: center;
+#businessname {
+  font-family: 'Comfortaa';
+  font-size: 1.15em;
+  color: white;
+  font-style: bold;
+}
+
+#address {
+  font-family: 'Farsan';
+}
+
+#direction {
+  width: 30px;
+  height: 30px;
+}
+
+#image {
+  margin-right: 20px;
 }
